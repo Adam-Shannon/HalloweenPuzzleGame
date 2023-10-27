@@ -7,3 +7,12 @@ Issues:
 - Generating AI images 
 - Pygame to create a shell of the game 
 - Creative elements - invent a story  
+
+
+new ideas:
+- add a timer (escape rooms have a timer, let's say the monster/killer kills the player when time runs out)
+- add a hint system? (if a user is not sure what to do, offer him a possible action he could take)
+if we are struggling to determine when a player makes a "bad" action, we can just use a predetermined list of actions
+- can we add music/soundtrack/sound effects?
+- text to speech/ or record voice for predetermined story lines
+- inventory for picking up items?

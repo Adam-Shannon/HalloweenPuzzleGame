@@ -1,0 +1,24 @@
+To generate the images, we first need to create a plot to base them of.
+
+We should have several rooms (~5) with a secret code/specific action that’s needed to progress to the next room.
+
+PLOT:
+
+We start in a haunted house…
+
+
+
+
+
+
+
+
+
+
+
+
+Ideas:
+- A killer/monster character
+- Certain careless actions will cause GAME OVER
+- Different types of puzzles: combination locks, pattern recognitions, simple logic puzzles, audio queues, puzzle with a barcode
+
