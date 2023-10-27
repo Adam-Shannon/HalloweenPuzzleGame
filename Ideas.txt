@@ -1,0 +1,9 @@
+Escape room puzzle game using AI generated art
+- if possible slight changes in image each time you play the game
+-- some restriction on what we can generate
+- Halloween/horror theme
+
+Issues:
+- Generating AI images 
+- Pygame to create a shell of the game 
+- Creative elements - invent a story  
