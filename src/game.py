@@ -1,5 +1,4 @@
 import pygame
-from sqlalchemy import false
 from components.state import First
 import components.game_data as gd
 import time
@@ -79,7 +78,9 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
+        elif event.type == pygame.KEYUP:
+            mixer.Channel(1).play(heartbeat, maxtime=5400) #in ms
+            #state = state.change_level()
         # elif event.type == pygame.KEYUP:
         #     state = state.change_level()
         elif event.type == pygame.KEYDOWN:
@@ -96,9 +97,7 @@ while running:
     text_surface = font.render(input_text, True, (255, 255, 255)) 
     screen.blit(text_surface, (input_rect.x, input_rect.y)) 
 
-        if event.type == pygame.KEYUP:
-            mixer.Channel(1).play(heartbeat, maxtime=5400) #in ms
-            #state = state.change_level()
+        
 
 
     # Displaying the timer
