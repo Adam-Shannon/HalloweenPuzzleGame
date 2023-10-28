@@ -30,7 +30,7 @@ while running:
          else:
             input_text += event.unicode
     
-    text_srf = font.render(input_text, True, (255, 255, 255))
+    
     pygame.draw.rect(screen, pygame.Color('purple'), input_rect) 
     text_surface = font.render(input_text, True, (255, 255, 255)) 
     screen.blit(text_surface, (input_rect.x, input_rect.y)) 
