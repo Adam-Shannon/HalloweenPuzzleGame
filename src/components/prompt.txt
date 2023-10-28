@@ -1,1 +1,1 @@
-Acting like an villain_name , ask a spooky riddle with the format with the riddle within {} brackets and the answer within () brackets , the answer cannot be prev_answers
+acting like villain_name generate a spooky riddle where the answer is riddle_answer , the answer should not appear in your response

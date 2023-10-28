@@ -1,5 +1,9 @@
 from components.generator import generate
 import regex as re
+import pandas as pd
+import random
+
+spooky_words = pd.read_csv("src/components/spooks.csv").columns.tolist()
 class Levl():
     def __init__(self, index, bg, screen, gd):
         self.index = index
@@ -13,9 +17,13 @@ class Levl():
         with open("src/components/prompt.txt") as f:
             text = f.readline()
             text = text.replace("villain_name", villain)
-            text = text.replace("prev_answers", ",".join(self.gd.previous_answers))
-            print(text)
-            (riddle,answer) = generate(text)
+            #text = text.replace("prev_answers", ",".join(self.gd.previous_answers))
+            answer = random.choice(spooky_words)
+            spooky_words.remove(answer)
+            text = text.replace("riddle_answer", answer)
+            riddle = generate(text)
+            extractor = re.compile(f"\s({answer})(\w+)\s",flags=re.IGNORECASE)
+            riddle = extractor.sub("___",riddle)
             print(riddle)
             print(answer)
 
