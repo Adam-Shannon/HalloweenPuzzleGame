@@ -10,15 +10,11 @@ def generate(prompt):
     try:
        response = g4f.ChatCompletion.create(
        model="gpt-3.5-turbo",
-       provider=g4f.Provider.ChatgptAi,
-       messages=[{"role": "user", "content": prompt}],
-       stream=g4f.Provider.ChatgptAi.supports_stream,
+       messages=[{"role": "user", "content": prompt}]
        )
 
-       fulltext = "".join([i for i in response])
-
-       riddle = re.search("\{(\w+)\}", fulltext)
-       answer = re.search("\((\w+)\)", fulltext)
+       riddle = re.search("\{(.*?)\}",response)
+       answer = response
        return (riddle,answer) 
     except:
         generate(prompt)
