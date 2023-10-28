@@ -82,8 +82,8 @@ while running:
         elif event.type == pygame.KEYUP:
             mixer.Channel(1).play(heartbeat, maxtime=5400) #in ms
             #state = state.change_level()
-        # elif event.type == pygame.KEYUP:
-        #     state = state.change_level()
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+             state = state.change_level()
         elif event.type == pygame.KEYDOWN:
          if event.key == pygame.K_BACKSPACE:
             input_text =  input_text[:-1]

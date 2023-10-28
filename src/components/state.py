@@ -27,6 +27,7 @@ class Levl():
             print(answer)
 
     def begin_level(self):
+        print(self.index)
         path = "src/components/images/"+self.gd.images[self.index]
         background = pg.image.load(path)
         self.ask_riddle(self.gd.images[self.index].rstrip(".png"))
