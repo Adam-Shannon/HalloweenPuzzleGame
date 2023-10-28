@@ -64,6 +64,7 @@ while running:
     font = pygame.font.Font(None, 36)
     label = font.render(text, True, (0, 0, 0))
     text_rect = label.get_rect(center=(SCREEN_WIDTH  - 30, 20))
+    pygame.draw.rect(screen, WHITE, (SCREEN_WIDTH - 50, 5, 40, 30))
     screen.blit(label, text_rect)
 
 
