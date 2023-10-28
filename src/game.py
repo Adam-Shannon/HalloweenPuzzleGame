@@ -2,6 +2,7 @@ import pygame
 from components.state import Levl
 import components.game_data as gd
 import time
+import math
 
 pygame.init()
 width = 1280
@@ -12,8 +13,8 @@ clock = pygame.time.Clock()
 running = True
 state =  Levl(1, screen, gd)
 input_text = ''
-rid_rect = pygame.Rect(0,0,width,30)
-input_rect = pygame.Rect(0, height*0.8, width, 30) 
+rid_rect = pygame.Rect(0,0,width,0.3*height-font_size)
+input_rect = pygame.Rect(0, height-font_size, width, font_size) 
 font = pygame.font.SysFont(None, 60)
 answering = False
 
@@ -47,8 +48,16 @@ ran = False
 delay = t_start
 # ------------------------------------------------------------------------------------
 
+def RiddleDisplayer(screen,rid_rect,riddle):
+   
+   riddle_lines = riddle.splitlines()
+   line_height = rid_rect.top
+   for line in riddle_lines:
+        text_surface = font.render(line, True, (255,255,255))
+        screen.blit(text_surface, (rid_rect.left, line_height))
+        line_height += font_size +2
 
-
+RiddleDisplayer(screen,rid_rect,'Test Riddle \nI am nowhere \nBut i am here \nI am alone \nbut i am in company \nWhat am i?')
 
 while running:
   
@@ -68,13 +77,7 @@ while running:
 
 
     # poll for events
-    riddle = 'Test Riddle \n I am nowhere \n But i am here \n I am alone \n but i am in company \n What am i?'
-    riddle_lines = riddle.splitlines()
-    line_height = rid_rect.top
-    for line in riddle_lines:
-        text_surface = font.render(line, True, (255,255,255))
-        screen.blit(text_surface, (rid_rect.left, line_height))
-        line_height += font_size + 2
+    
     # pygame.QUIT event means the user clicked X to close your window
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -92,11 +95,13 @@ while running:
             continue
          else:
             input_text += event.unicode
-    
-    
     pygame.draw.rect(screen, pygame.Color('purple'), input_rect) 
+    
     text_surface = font.render(input_text, True, (255, 255, 255)) 
-    screen.blit(text_surface, (input_rect.x, input_rect.y)) 
+    screen.blit(text_surface, (input_rect.x, input_rect.y))
+
+    
+    
 
         
 
