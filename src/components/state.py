@@ -1,8 +1,9 @@
 class Levl():
-    def __init__(self, index, bg, screen):
+    def __init__(self, index, bg, screen, gd):
         self.index = index
         self.bg = bg
         self.screen = screen
+        self.gd = gd
         self.begin_level()
 
     def change_level(self):
@@ -12,13 +13,15 @@ class Levl():
         
 
 class First(Levl):
-    def __init__(self, screen):
-        super().__init__(1, "red", screen)
+    def __init__(self, screen, gd):
+        super().__init__(1, "red", screen, gd)
     def change_level(self):
-        return Second(self.screen)
+        print([i.name for i in self.gd.inventory] )
+        return Second(self.screen, self.gd)
 
 class Second(Levl):
-    def __init__(self, screen):
-        super().__init__(2, "blue", screen)
+    def __init__(self, screen, gd):
+        super().__init__(2, "blue", screen, gd)
     def change_level(self):
-        return First(self.screen)
+        print([i.name for i in self.gd.inventory])
+        return First(self.screen, self.gd)

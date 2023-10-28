@@ -1,11 +1,12 @@
 import pygame
 from components.state import First
+import components.game_data as gd
 
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
 running = True
-state =  First(screen)
+state =  First(screen, gd)
 
 while running:
     # poll for events
