@@ -1,11 +1,11 @@
 import pygame
-from components.state import Levl, change_levl
+from components.state import First
 
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
 running = True
-state =  Levl(1,"blue")
+state =  First()
 
 while running:
     # poll for events
@@ -14,7 +14,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.KEYUP:
-            state = change_levl(state)
+            state = state.change_level()
 
     # fill the screen with a color to wipe away anything from last frame
     screen.fill(state.bg)
