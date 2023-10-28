@@ -4,11 +4,18 @@ import components.game_data as gd
 import time
 
 pygame.init()
-screen = pygame.display.set_mode((1280, 720))
+SCREEN_WIDTH = 1280
+SCREEN_HEIGHT = 720
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 running = True
 state =  First(screen, gd)
 COUNTDOWN_TIME = 120
+
+# COLORS
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
 
 t_start = time.perf_counter()
 
@@ -51,6 +58,14 @@ while running:
         if event.type == pygame.KEYUP:
             play_sound(whistle)
             state = state.change_level()
+
+    # Displaying the timer
+    text = f"{(int)(COUNTDOWN_TIME - (t_stop - t_start))}"
+    font = pygame.font.Font(None, 36)
+    label = font.render(text, True, (0, 0, 0))
+    text_rect = label.get_rect(center=(SCREEN_WIDTH  - 30, 20))
+    screen.blit(label, text_rect)
+
 
     # flip() the display to put your work on screen
     pygame.display.flip()
