@@ -18,7 +18,7 @@ answering = False
 
 clock = pygame.time.Clock()
 
-COUNTDOWN_TIME = 120 #seconds
+COUNTDOWN_TIME = 35 #seconds
 
 # COLORS
 WHITE = (255, 255, 255)
@@ -95,7 +95,7 @@ while running:
     
     pygame.draw.rect(screen, pygame.Color('purple'), input_rect) 
     text_surface = font.render(input_text, True, (255, 255, 255)) 
-    screen.blit(text_surface, (input_rect.x, input_rect.y)) 
+    screen.blit(text_surface, (input_rect.x, input_rect.y))
 
         
 
