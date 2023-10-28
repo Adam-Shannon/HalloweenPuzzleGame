@@ -5,7 +5,7 @@ pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
 running = True
-state =  First()
+state =  First(screen)
 
 while running:
     # poll for events
@@ -15,11 +15,6 @@ while running:
             running = False
         if event.type == pygame.KEYUP:
             state = state.change_level()
-
-    # fill the screen with a color to wipe away anything from last frame
-    screen.fill(state.bg)
-
-    # RENDER YOUR GAME HERE
 
     # flip() the display to put your work on screen
     pygame.display.flip()
