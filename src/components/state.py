@@ -3,6 +3,7 @@ import regex as re
 import pandas as pd
 import random
 import pygame as pg
+from PIL import Image
 
 spooky_words = pd.read_csv("src/components/spooks.csv").columns.tolist()
 class Levl():
@@ -29,7 +30,11 @@ class Levl():
     def begin_level(self):
         print(self.index)
         path = "src/components/images/"+self.gd.images[self.index]
-        background = pg.image.load(path)
+        image = Image.open(path)
+        new_image = image.resize((1280, 720))
+        new_image.save('resized.png')
+        background = pg.image.load('resized.png')
+        #background = pg.image.load(path)
         self.ask_riddle(self.gd.images[self.index].rstrip(".png"))
         self.screen.blit(background, background.get_rect())
     
