@@ -104,8 +104,8 @@ while running:
     text = f"{(int)(COUNTDOWN_TIME - (t_stop - t_start))}"
     font = pygame.font.Font(None, 36)
     label = font.render(text, True, (0, 0, 0))
-    text_rect = label.get_rect(center=(SCREEN_WIDTH  - 30, 20))
-    pygame.draw.rect(screen, WHITE, (SCREEN_WIDTH - 50, 5, 40, 30))
+    text_rect = label.get_rect(center=(width - 30, 20))
+    pygame.draw.rect(screen, WHITE, (width - 50, 5, 40, 30))
     screen.blit(label, text_rect)
 
 
