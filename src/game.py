@@ -25,14 +25,14 @@ t_start = time.perf_counter()
 from pygame import mixer
 mixer.init()
 # play atmoshpere soundtrack forever
-mixer.Channel(0).play(mixer.Sound("components/sound files/horror-background-atmosphere-156462.wav"), -1)
+mixer.Channel(0).play(mixer.Sound("src/components/sound files/horror-background-atmosphere-156462.wav"), -1)
 
 #sfx
-door = mixer.Sound("components/sound files/door-creaking-121673.mp3")
-whispers = mixer.Sound("components/sound files/four_voices_whispering-6943.mp3")
-heartbeat = mixer.Sound("components/sound files/heartbeat.mp3")
-whistle = mixer.Sound("components/sound files/wind-whistle-96776.mp3")
-scream = mixer.Sound("components/sound files/demonic-woman-scream-6333.mp3")
+door = mixer.Sound("src/components/sound files/door-creaking-121673.mp3")
+whispers = mixer.Sound("src/components/sound files/four_voices_whispering-6943.mp3")
+heartbeat = mixer.Sound("src/components/sound files/heartbeat.mp3")
+whistle = mixer.Sound("src/components/sound files/wind-whistle-96776.mp3")
+scream = mixer.Sound("src/components/sound files/demonic-woman-scream-6333.mp3")
 #hello = pygame.mixer.Sound(text_to_speech.text_to_speech("hello"))
 
 ran = False
