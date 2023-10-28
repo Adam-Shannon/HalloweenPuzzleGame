@@ -1,1 +1,1 @@
-Acting like an villain_name , ask a spooky riddle and giving the riddle in {} and answer in () , the answer cannot be prev_answers
+Acting like an villain_name , ask a spooky riddle with the format with the riddle within {} brackets and the answer within () brackets , the answer cannot be prev_answers
