@@ -1,8 +1,9 @@
 import pygame
-from components.state import First
+from components.state import Levl
 import components.game_data as gd
 import time
 import math
+
 pygame.init()
 width = 1280
 height = 720
@@ -10,7 +11,7 @@ font_size = 30
 screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
-state =  First(screen, gd)
+state =  Levl(1, screen, gd)
 input_text = ''
 rid_rect = pygame.Rect(0,0,width,0.3*height-font_size)
 input_rect = pygame.Rect(0, height-font_size, width, font_size) 
@@ -84,8 +85,8 @@ while running:
         elif event.type == pygame.KEYUP:
             mixer.Channel(1).play(heartbeat, maxtime=5400) #in ms
             #state = state.change_level()
-        # elif event.type == pygame.KEYUP:
-        #     state = state.change_level()
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+             state = state.change_level()
         elif event.type == pygame.KEYDOWN:
          if event.key == pygame.K_BACKSPACE:
             input_text =  input_text[:-1]
