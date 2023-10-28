@@ -1,7 +1,8 @@
 import pygame
-from components.state import First
+from components.state import Levl
 import components.game_data as gd
 import time
+
 pygame.init()
 width = 1280
 height = 720
@@ -9,7 +10,7 @@ font_size = 30
 screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
-state =  First(screen, gd)
+state =  Levl(1, screen, gd)
 input_text = ''
 rid_rect = pygame.Rect(0,0,width,30)
 input_rect = pygame.Rect(0, height*0.8, width, 30) 
