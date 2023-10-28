@@ -48,17 +48,6 @@ ran = False
 delay = t_start
 # ------------------------------------------------------------------------------------
 
-def RiddleDisplayer(screen,rid_rect,riddle):
-   
-   riddle_lines = riddle.splitlines()
-   line_height = rid_rect.top
-   for line in riddle_lines:
-        text_surface = font.render(line, True, (255,255,255))
-        screen.blit(text_surface, (rid_rect.left, line_height))
-        line_height += font_size +2
-
-RiddleDisplayer(screen,rid_rect,'Test Riddle \nI am nowhere \nBut i am here \nI am alone \nbut i am in company \nWhat am i?')
-
 while running:
   
     t_stop = time.perf_counter() 
@@ -85,14 +74,19 @@ while running:
         elif event.type == pygame.KEYUP:
             mixer.Channel(1).play(heartbeat, maxtime=5400) #in ms
             #state = state.change_level()
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-             state = state.change_level()
+        # elif event.type == pygame.MOUSEBUTTONDOWN:
+        #      state = state.change_level()
         elif event.type == pygame.KEYDOWN:
          if event.key == pygame.K_BACKSPACE:
             input_text =  input_text[:-1]
          elif event.key==pygame.K_RETURN:
             #Should do something with answer here
-            continue
+            
+            if state.isAnswer(input_text):
+                state = state.change_level()
+            input_text = ''
+
+                
          else:
             input_text += event.unicode
     pygame.draw.rect(screen, pygame.Color('purple'), input_rect) 
