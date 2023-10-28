@@ -3,14 +3,22 @@ from sqlalchemy import false
 from components.state import First
 import components.game_data as gd
 import time
-
 pygame.init()
-SCREEN_WIDTH = 1280
-SCREEN_HEIGHT = 720
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+width = 1280
+height = 720
+font_size = 30
+screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
 state =  First(screen, gd)
+input_text = ''
+rid_rect = pygame.Rect(0,0,width,30)
+input_rect = pygame.Rect(0, height*0.8, width, 30) 
+font = pygame.font.SysFont(None, 60)
+answering = False
+
+clock = pygame.time.Clock()
+
 COUNTDOWN_TIME = 120 #seconds
 
 # COLORS
@@ -41,6 +49,7 @@ delay = t_start
 
 
 
+
 while running:
   
     t_stop = time.perf_counter() 
@@ -59,13 +68,38 @@ while running:
 
 
     # poll for events
+    riddle = 'Test Riddle \n I am nowhere \n But i am here \n I am alone \n but i am in company \n What am i?'
+    riddle_lines = riddle.splitlines()
+    line_height = rid_rect.top
+    for line in riddle_lines:
+        text_surface = font.render(line, True, (255,255,255))
+        screen.blit(text_surface, (rid_rect.left, line_height))
+        line_height += font_size + 2
     # pygame.QUIT event means the user clicked X to close your window
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
+        # elif event.type == pygame.KEYUP:
+        #     state = state.change_level()
+        elif event.type == pygame.KEYDOWN:
+         if event.key == pygame.K_BACKSPACE:
+            input_text =  input_text[:-1]
+         elif event.key==pygame.K_RETURN:
+            #Should do something with answer here
+            continue
+         else:
+            input_text += event.unicode
+    
+    
+    pygame.draw.rect(screen, pygame.Color('purple'), input_rect) 
+    text_surface = font.render(input_text, True, (255, 255, 255)) 
+    screen.blit(text_surface, (input_rect.x, input_rect.y)) 
+
         if event.type == pygame.KEYUP:
             mixer.Channel(1).play(heartbeat, maxtime=5400) #in ms
-            state = state.change_level()
+            #state = state.change_level()
+
 
     # Displaying the timer
     text = f"{(int)(COUNTDOWN_TIME - (t_stop - t_start))}"
