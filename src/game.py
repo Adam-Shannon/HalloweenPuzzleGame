@@ -1,4 +1,5 @@
 import pygame
+from sqlalchemy import false
 from components.state import First
 import components.game_data as gd
 import time
@@ -8,7 +9,7 @@ screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
 running = True
 state =  First(screen, gd)
-COUNTDOWN_TIME = 120
+COUNTDOWN_TIME = 120 #seconds
 
 t_start = time.perf_counter()
 
@@ -27,29 +28,36 @@ whistle = mixer.Sound("components/sound files/wind-whistle-96776.mp3")
 scream = mixer.Sound("components/sound files/demonic-woman-scream-6333.mp3")
 #hello = pygame.mixer.Sound(text_to_speech.text_to_speech("hello"))
 
-def play_sound(sound):
- mixer.Channel(1).play(sound)
- mixer.music.stop()
-
+ran = False
+delay = t_start
 # ------------------------------------------------------------------------------------
 
 
 
 while running:
+  
+    t_stop = time.perf_counter() 
+    if COUNTDOWN_TIME <= (t_stop - t_start):
+        running = False
+    
+    # making a heartbeat sound every 10 seconds, if only 30 seconds left
+    time_left = COUNTDOWN_TIME - (t_stop - t_start)
+    if int(time_left) <= 30 and int(time_left) %10 == 0:
+        if ran == False:
+            mixer.Channel(1).play(heartbeat, maxtime=5400) #in ms
+            ran = True
+            delay = t_stop
+    if t_stop - delay > 1:
+        ran = False
+
 
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
-    t_stop = time.perf_counter()
-    
-    if COUNTDOWN_TIME <= (t_stop - t_start):
-        running = False
-        
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.KEYUP:
-            play_sound(whistle)
+            mixer.Channel(1).play(heartbeat, maxtime=5400) #in ms
             state = state.change_level()
 
     # flip() the display to put your work on screen
