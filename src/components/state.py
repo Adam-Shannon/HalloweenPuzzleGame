@@ -4,16 +4,17 @@ import pandas as pd
 import random
 import pygame as pg
 from PIL import Image
+import time
 
 spooky_words = pd.read_csv("src/components/spooks.csv").columns.tolist()
 class Levl():
-    def __init__(self, index, screen, gd):
+    def __init__(self, index, screen, gd, t_loading_start):
         self.index = index
         self.screen = screen
         self.gd = gd
         self.answer = None
         self.riddle = None
-        self.begin_level()
+        self.begin_level(t_loading_start)
 
     def ask_riddle(self, villain):
         with open("src/components/prompt.txt") as f:
@@ -30,7 +31,7 @@ class Levl():
             self.riddle = riddle
             self.answer = answer
 
-    def begin_level(self):
+    def begin_level(self, t_loading_start):
         print(self.index)
         path = "src/components/images/"+self.gd.images[self.index]
         image = Image.open(path)
@@ -41,9 +42,12 @@ class Levl():
         self.ask_riddle(self.gd.images[self.index].rstrip(".png"))
         self.screen.blit(background, background.get_rect())
         self.RiddlePurveyeor()
+        self.t_loading_diff = time.perf_counter() - t_loading_start
+        print(self.t_loading_diff)
     
-    def change_level(self):
-        return Levl(self.index+1, self.screen, self.gd)
+    def change_level(self, t_loading_start):
+        t_loading = time.perf_counter()
+        return Levl(self.index+1, self.screen, self.gd, t_loading_start)
     def RiddlePurveyeor(self):
         font = pg.font.SysFont(None, 30)
         riddle_lines = self.riddle.splitlines()

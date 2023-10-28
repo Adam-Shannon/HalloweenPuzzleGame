@@ -11,7 +11,7 @@ font_size = 30
 screen = pygame.display.set_mode((width, height))
 clock = pygame.time.Clock()
 running = True
-state =  Levl(1, screen, gd)
+state =  Levl(1, screen, gd, 0)
 input_text = ''
 rid_rect = pygame.Rect(0,0,width,0.3*height-font_size)
 input_rect = pygame.Rect(0, height-font_size, width, font_size) 
@@ -20,7 +20,7 @@ answering = False
 
 clock = pygame.time.Clock()
 
-COUNTDOWN_TIME = 120 #seconds
+COUNTDOWN_TIME = 180 #seconds
 
 # COLORS
 WHITE = (255, 255, 255)
@@ -46,16 +46,17 @@ scream = mixer.Sound("src/components/sound files/demonic-woman-scream-6333.mp3")
 
 ran = False
 delay = t_start
+t_loading = 0 
 # ------------------------------------------------------------------------------------
 
 while running:
   
     t_stop = time.perf_counter() 
-    if COUNTDOWN_TIME <= (t_stop - t_start):
+    if COUNTDOWN_TIME <= (t_stop - t_start + t_loading):
         running = False
     
     # making a heartbeat sound every 10 seconds, if only 30 seconds left
-    time_left = COUNTDOWN_TIME - (t_stop - t_start)
+    time_left = COUNTDOWN_TIME - (t_stop - t_start + t_loading)
     if int(time_left) <= 30 and int(time_left) %10 == 0:
         if ran == False:
             mixer.Channel(1).play(heartbeat, maxtime=5400) #in ms
@@ -83,7 +84,8 @@ while running:
             #Should do something with answer here
             
             if state.isAnswer(input_text):
-                state = state.change_level()
+                state = state.change_level(time.perf_counter())
+                t_loading = state.t_loading_diff
             else:
                 mixer.Channel(2).play(scream)
 
