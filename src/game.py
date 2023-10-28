@@ -85,7 +85,7 @@ while running:
             if state.isAnswer(input_text):
                 state = state.change_level()
             else:
-                mixer.Channel(1).play(scream)
+                mixer.Channel(2).play(scream)
 
             input_text = ''
 
