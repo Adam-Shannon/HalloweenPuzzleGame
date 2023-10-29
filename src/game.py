@@ -8,7 +8,12 @@ pygame.init()
 width = 1280
 height = 720
 font_size = 30
-screen = pygame.display.set_mode((width, height))
+full_screen = False
+if not full_screen:
+    screen = pygame.display.set_mode((width, height))
+else:
+    screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+
 clock = pygame.time.Clock()
 running = True
 state =  Levl(1, screen, gd)
@@ -81,10 +86,9 @@ while running:
             input_text =  input_text[:-1]
          elif event.key==pygame.K_RETURN:
             #Should do something with answer here
-            current_time = COUNTDOWN_TIME
             if state.isAnswer(input_text):
                 state = state.change_level()
-                COUNTDOWN_TIME = current_time
+                COUNTDOWN_TIME = COUNTDOWN_TIME + 25
             else:
                 mixer.Channel(2).play(scream)
 

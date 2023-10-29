@@ -14,6 +14,9 @@ def generate(prompt):
        )
 
        riddle = response
+       print(riddle)
+       if riddle == None:
+           raise ValueError("Response not filled")
        return riddle
     except:
         generate(prompt)
