@@ -25,20 +25,21 @@ class Levl():
             text = text.replace("riddle_answer", answer)
             print(text)
             riddle = generate(text)
-            extractor = re.compile(f"\s({answer})(\w+)\s",flags=re.IGNORECASE)
-            riddle = extractor.sub("___",riddle)
+            extractor = f"(\s*){answer}(\w*)(\s*)"
+            extractor = re.compile(extractor,flags=re.IGNORECASE)
+            riddle = re.sub(extractor,"___",riddle)
             self.riddle = riddle
             self.answer = answer
 
     def begin_level(self):
-        print(self.index)
-        path = "src/components/images/"+self.gd.images[self.index]
+        choice = random.randint(0,len(self.gd.images)-1)
+        path = "src/components/images/"+self.gd.images[choice]
         image = Image.open(path)
         new_image = image.resize((1280, 720))
         new_image.save('resized.png')
         background = pg.image.load('resized.png')
         #background = pg.image.load(path)
-        self.ask_riddle(self.gd.images[self.index].rstrip(".png"))
+        self.ask_riddle(self.gd.images[choice].rstrip(".png"))
         self.screen.blit(background, background.get_rect())
         self.RiddlePurveyeor()
     
