@@ -81,9 +81,10 @@ while running:
             input_text =  input_text[:-1]
          elif event.key==pygame.K_RETURN:
             #Should do something with answer here
-            
+            current_time = COUNTDOWN_TIME
             if state.isAnswer(input_text):
                 state = state.change_level()
+                COUNTDOWN_TIME = current_time
             else:
                 mixer.Channel(2).play(scream)
 

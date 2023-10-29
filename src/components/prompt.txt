@@ -1,1 +1,1 @@
-acting like villain_name generate a spooky riddle where the answer is riddle_answer , the answer should not appear in your response
+acting like villain_name generate a spooky riddle where the answer is riddle_answer and do not tell me the answer
