@@ -56,3 +56,11 @@ class Levl():
     def isAnswer(self,user_answer):
         return user_answer.lower().replace(" ", "") == self.answer.lower().replace(" ", "")
          
+class Victory():
+    def __init__(self, screen):
+        self.screen = screen
+        image = Image.open('src/components/Victory.png')
+        new_image = image.resize((1280, 720))
+        new_image.save('resized.png')
+        background = pg.image.load('resized.png')
+        self.screen.blit(background, background.get_rect())

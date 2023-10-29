@@ -1,5 +1,5 @@
 import pygame
-from components.state import Levl
+from components.state import Levl, Victory
 import components.game_data as gd
 import time
 import math
@@ -22,6 +22,7 @@ rid_rect = pygame.Rect(0,0,width,0.3*height-font_size)
 input_rect = pygame.Rect(0, height-font_size, width, font_size) 
 font = pygame.font.SysFont(None, 60)
 answering = False
+score = 0
 
 clock = pygame.time.Clock()
 
@@ -87,11 +88,16 @@ while running:
          elif event.key==pygame.K_RETURN:
             #Should do something with answer here
             if state.isAnswer(input_text):
-                state = state.change_level()
-                COUNTDOWN_TIME = COUNTDOWN_TIME + 25
+                score+=1
+                if score >= 5:
+                    state = Victory(screen)
+                    COUNTDOWN_TIME = 10000
+                else: 
+                    state = state.change_level()
+                    COUNTDOWN_TIME = COUNTDOWN_TIME + 25
             else:
                 mixer.Channel(2).play(scream)
-
+        
             input_text = ''
 
                 
